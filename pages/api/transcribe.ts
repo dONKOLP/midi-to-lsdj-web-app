@@ -28,7 +28,7 @@ export default async function handler(req, res) {
         const trackData = processTrack(midiData, 0)
         const projectData = processProject(midiData)
         res.status(200).json({
-          track: trackData,
+          track: { ...trackData, tempo: projectData.tempo },
           project: projectData
         })
       }
