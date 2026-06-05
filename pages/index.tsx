@@ -6,6 +6,16 @@ import ChainScreen from '../components/screens/ChainScreen'
 import PhraseScreen from "../components/screens/PhraseScreen";
 import TableScreen from "../components/screens/TableScreen";
 
+function downloadJson(data: object, filename: string) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 export default function Home() {
   const { data } = useContext(AppContext)
   if (data === null) {
@@ -38,6 +48,23 @@ export default function Home() {
   }
   return (
     <div className="App">
+      <section style={{ padding: '8px 16px' }}>
+        <button
+          onClick={() => downloadJson(data.track, 'lsdj-track.json')}
+          style={{
+            fontFamily: 'LSDJ, monospace',
+            fontSize: '1rem',
+            background: 'var(--colour-3)',
+            color: 'var(--colour-1)',
+            border: '2px solid var(--colour-2)',
+            padding: '6px 16px',
+            cursor: 'pointer',
+            borderRadius: '2px',
+          }}
+        >
+          &#x25BC; EXPORT JSON
+        </button>
+      </section>
       <section>
         <h1>Tables</h1>
         <TableScreen data={data} />
