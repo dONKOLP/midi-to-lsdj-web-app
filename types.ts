@@ -34,7 +34,7 @@ export declare type LSDJTrack = {
     chains: LSDJChain[];
     phrases: LSDJPhrase[];
     tables: LSDJTable[];
-    tempo: number
+    tempo?: number
 };
 
 export declare type LSDJProject = {
